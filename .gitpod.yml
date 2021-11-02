@@ -13,3 +13,9 @@ ports:
   - port: 8001
     onOpen: open-browser
     visibility: public
+vscode:
+  extensions:
+    - vscjava.vscode-java-pack
+    - pivotal.vscode-boot-dev-pack
+    
+
