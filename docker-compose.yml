@@ -155,6 +155,16 @@ services:
       - app-caching
       - app-sql-rest-api
     restart: always
+  
+  redis-insight:
+    image: redislabs/redisinsight:latest
+    ports:
+      - "8001:8001"
+    networks:
+      - redis-microservices-network
+    depends_on:
+      - app-redis
+    restart: always
 
 networks:
   redis-microservices-network:
