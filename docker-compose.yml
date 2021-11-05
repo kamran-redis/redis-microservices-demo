@@ -166,15 +166,19 @@ services:
       - app-redis
     restart: always
   
-  #redis-inisight-setup:
-  #  image: curlimages/curl
-  #  command: -vvvv -X "POST" "http://redis-insight:8001/api/instance/" -H "Content-Type: application/json; charset=utf-8" -d $${"host": "app-redis","name": "redis","connectionType": "STANDALONE","port": 6379}
-  #  networks:
-  #    - redis-microservices-network
-  #  depends_on:
-  #    - redis-insight
-  #    - app-redis
-  #  restart: "no"
+  redis-insight-setup:
+    image: curlimages/curl
+    command: >
+           -s -vvv -X "POST" "http://redis-insight:8001/api/instance/"  
+           -H "Content-Type: application/json; charset=utf-8" 
+           -d '{"host": "app-redis","name": "redis","connectionType": "STANDALONE","port": 6379}'
+          
+    networks:
+      - redis-microservices-network
+    depends_on:
+      - redis-insight
+      - app-redis
+    restart: "on-failure"
       
 
 networks:
